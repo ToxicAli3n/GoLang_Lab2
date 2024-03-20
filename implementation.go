@@ -15,14 +15,14 @@ func reverseSlice(slice []string) []string {
 	return slice
 }
 
-func PrefixToPostfix(prefixExpr string) string {
+func PrefixToPostfix(prefixExpr string) (string, string) {
 	expr := reverseSlice(strings.Split(prefixExpr, " "))
 	var stack []string
 
 	for _, token := range expr {
 		if isOperator(token) {
 			if len(stack) < 2 {
-				return "Error! Invalid expression!"
+				return "Error! Invalid expression!", ""
 			}
 			op1 := stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
@@ -35,8 +35,8 @@ func PrefixToPostfix(prefixExpr string) string {
 	}
 
 	if len(stack) != 1 {
-		return "Error! Invalid expression!"
+		return "Error! Invalid expression!", ""
 	}
 
-	return stack[0]
+	return stack[0], ""
 }
