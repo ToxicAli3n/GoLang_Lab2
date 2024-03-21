@@ -55,3 +55,11 @@ func TestPrefixToPostfixInvalidInput(t *testing.T) {
 		})
 	}
 }
+
+func ExamplePrefixToPostfix() {
+	res, _ := PrefixToPostfix("- 5 * 4 2")
+	fmt.Println(res)
+
+	// Output:
+	// 5 4 2 * -
+}
