@@ -1,11 +1,18 @@
 package Lab_2
 
 import (
+	"fmt"
+	"strconv"
 	"strings"
 )
 
 func isOperator(c string) bool {
 	return strings.ContainsAny(c, "+-*/^")
+}
+
+func isValidOperand(c string) bool {
+	_, err := strconv.Atoi(c)
+	return err == nil
 }
 
 func reverseSlice(slice []string) []string {
@@ -15,14 +22,23 @@ func reverseSlice(slice []string) []string {
 	return slice
 }
 
-func PrefixToPostfix(prefixExpr string) (string, string) {
-	expr := reverseSlice(strings.Split(prefixExpr, " "))
+func PrefixToPostfix(prefixExpr string) (string, error) {
+	tokens := strings.Split(prefixExpr, " ")
+
+	for _, token := range tokens {
+		if isOperator(token) || isValidOperand(token) {
+			continue
+		}
+		return "", fmt.Errorf("invalid input")
+	}
+
+	expr := reverseSlice(tokens)
 	var stack []string
 
 	for _, token := range expr {
 		if isOperator(token) {
 			if len(stack) < 2 {
-				return "Error! Invalid expression!", ""
+				return "", fmt.Errorf("invalid expression")
 			}
 			op1 := stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
@@ -35,8 +51,8 @@ func PrefixToPostfix(prefixExpr string) (string, string) {
 	}
 
 	if len(stack) != 1 {
-		return "Error! Invalid expression!", ""
+		return "", fmt.Errorf("invalid expression")
 	}
 
-	return stack[0], ""
+	return stack[0], nil
 }
