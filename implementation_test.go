@@ -42,7 +42,7 @@ func TestPrefixToPostfixInvalidInput(t *testing.T) {
 		{"%", fmt.Errorf("invalid input")},
 		{"", fmt.Errorf("invalid input")},
 		{"+ 2", fmt.Errorf("invalid expression")},
-		{"-", fmt.Errorf("invalid expression")},
+		{"-+ 2 3", fmt.Errorf("invalid input")},
 	}
 
 	for _, test := range tests {
