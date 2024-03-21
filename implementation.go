@@ -7,7 +7,7 @@ import (
 )
 
 func isOperator(c string) bool {
-	return strings.ContainsAny(c, "+-*/^")
+	return len(c) == 1 && strings.ContainsAny(c, "+-*/^")
 }
 
 func isValidOperand(c string) bool {
