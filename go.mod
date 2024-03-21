@@ -1,4 +1,3 @@
-
 module github.com/ToxicAli3n/GoLang_Lab2
 
 go 1.22
