@@ -14,13 +14,13 @@ type ComputeHandler struct {
 
 func (ch *ComputeHandler) Compute() error {
 	reader := bufio.NewReader(ch.Input)
-	str, err := reader.ReadString('\n')
+	str, _ := reader.ReadString('\n')
 	str = strings.TrimRight(str, "\n")
 	result, err := PrefixToPostfix(str)
 
 	if err != nil {
 		fmt.Fprintln(ch.Output, err)
-		return nil
+		return err
 	}
 	_, err = ch.Output.Write([]byte(result))
 
