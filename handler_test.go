@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestCompute(t *testing.T) {
+func TestCompute_Handler(t *testing.T) {
 	tests := []struct {
 		name        string
 		input       string
@@ -44,15 +44,15 @@ func TestCompute(t *testing.T) {
 			err := handler.Compute()
 
 			if (err != nil) != test.expectedErr {
-				t.Errorf("expected error: %v, actual: %v", test.expectedErr, err)
+				t.Errorf("expected error: %v, got: %v", test.expectedErr, err)
 			}
 
 			if err != nil && err.Error() != test.expected {
-				t.Errorf("expected error message: %s, actual: %s", test.expected, err.Error())
+				t.Errorf("expected error message: %s, got: %s", test.expected, err.Error())
 			}
 
 			if err == nil && output.String() != test.expected {
-				t.Errorf("expected output: %s, actual: %s", test.expected, output.String())
+				t.Errorf("expected output: %s, got: %s", test.expected, output.String())
 			}
 		})
 	}
